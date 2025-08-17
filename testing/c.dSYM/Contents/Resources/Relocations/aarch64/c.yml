@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/nellybarbarahernandezpreciado/Desktop/C-study-language/testing/c'
+relocations:     []
+...
