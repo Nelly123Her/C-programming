@@ -9,7 +9,7 @@
 
 ----
 
-## Notas personales
+## Notas 
 
 Hasta la página 23 he aprendido varios conceptos fundamentales que no conocía. Uno de los puntos más interesantes es que **C es un lenguaje bastante simple y conciso**, especialmente si lo comparamos con lenguajes modernos como **Python**, que poseen un ecosistema de librerías mucho más amplio.
 
@@ -192,16 +192,7 @@ for (inicialización; condición; incremento) {
 ```
 
 
-```c
-#include <stdio.h>
 
-/* Print Fahrenheit-Celsius table */
-int main() {
-    int fahr;
-    for (fahr = 0; fahr <= 300; fahr = fahr + 20)
-        printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
-}
-```
 #### Ejemplo práctico obtenido del libro
 
 ```c
@@ -245,4 +236,97 @@ fahr = fahr + 20;
 | 16   | 300    | Verdadero                  | 148.9              | `fahr += 20` → 320     |
 | 17   | 320    | Falsa                      | -                  | Se termina el bucle    |
 
----</file>
+---
+
+
+
+
+
+## Constantes Simbólicas
+
+**Fecha:** 24 de agosto de 2025
+
+### ¿Qué son las constantes simbólicas?
+
+Las **constantes simbólicas** son nombres descriptivos que se asignan a valores constantes mediante la directiva `#define`. Su uso es fundamental para escribir código más legible y mantenible.
+
+### ¿Por qué son importantes?
+
+1. **Legibilidad del código**: Hacen que el código sea más fácil de entender
+2. **Mantenimiento**: Si necesitas cambiar un valor, solo lo modificas en un lugar
+3. **Colaboración**: Otros programadores pueden entender mejor tu código
+4. **Evitan errores**: Reduces la posibilidad de escribir mal un número
+
+### Evitar números mágicos (Magic Numbers)
+
+Los **números mágicos** son valores numéricos que aparecen en el código sin explicación alguna. Esto hace que el código sea difícil de entender y mantener.
+
+#### ❌ Ejemplo con números mágicos:
+
+```c
+#include <stdio.h>
+
+int main() {
+    int fahr;
+
+    for (fahr = 0; fahr <= 300; fahr = fahr + 20) {
+        printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
+    }
+
+    return 0;
+}
+```
+
+**Problemas:**
+- ¿Por qué 300? ¿Por qué 20? ¿Por qué 32?
+- Si quiero cambiar el rango, tengo que buscar todos los números
+- No es claro qué representa cada valor
+
+#### ✅ Ejemplo con constantes simbólicas:
+
+```c
+#include <stdio.h>
+
+#define LOWER    0      /* límite inferior de la tabla */
+#define UPPER    300    /* límite superior de la tabla */
+#define STEP     20     /* incremento */
+#define FREEZING 32     /* punto de congelación del agua en °F */
+
+int main() {
+    int fahr;
+
+    for (fahr = LOWER; fahr <= UPPER; fahr = fahr + STEP) {
+        printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - FREEZING));
+    }
+
+    return 0;
+}
+```
+
+**Ventajas:**
+- El código se explica por sí mismo
+- Fácil modificación de valores
+- Menos propenso a errores
+- Mejor documentación del código
+
+### Sintaxis de `#define`
+
+```c
+#define NOMBRE_CONSTANTE valor
+```
+
+**Convenciones:**
+- Usar **MAYÚSCULAS** para el nombre
+- Usar **guiones bajos** para separar palabras
+- No usar punto y coma al final
+- Colocar las definiciones al inicio del archivo
+
+### Ejemplos adicionales
+
+```c
+#define PI           3.14159
+#define MAX_STUDENTS 50
+#define BUFFER_SIZE  1024
+#define TRUE         1
+#define FALSE        0
+```
